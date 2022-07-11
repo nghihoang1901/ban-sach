@@ -24,21 +24,28 @@ include_once('../libraries/xl_tac_gia.php');
                 $ten_tac_gia = $_POST['ten_tac_gia'];
                 $gioi_thieu = $_POST['gioi_thieu'];
                 
-                $result = $this->xl_tac_gia->them($ten_tac_gia, $gioi_thieu);
+                $result = $this->xl_tac_gia->them_tac_gia($ten_tac_gia, $gioi_thieu);
             }
 
             include_once('pages/ql_tac_gia/them.php');
 
         }
         function sua(){
-            $id_sua = $_GET['id_sua'];
+            $id_sua='';
+            if(isset($_GET['id_sua'])){
+                $id_sua = $_GET['id_sua'];
+            }
+            else{
+                redirect_by_javascript();
+            }
 
             if(isset($_POST['ten_tac_gia'])){
                 $ten_tac_gia = $_POST['ten_tac_gia'];
                 $gioi_thieu = $_POST['gioi_thieu'];
                 
-                $result = $this->xl_tac_gia->sua($ten_tac_gia, $gioi_thieu);
+                $result = $this->xl_tac_gia->sua_tac_gia($ten_tac_gia, $gioi_thieu, $id_sua);
             }
+            
             $info_tac_gia = $this->xl_tac_gia->load_info_tac_gia($id_sua);
 
             include_once('pages/ql_tac_gia/sua.php');

@@ -2,20 +2,6 @@
     include_once('../libraries/database.php');
     class xl_sach extends Database{
     
-        function load_danh_sach_loai_sach(){
-            $sql = "SELECT * FROM bs_loai_sach WHERE id_loai_cha = 0";
-            $this->setQuery($sql);
-            $ds_loai_sach_cap_1 = $this->loadAllRow();
-
-            foreach($ds_loai_sach_cap_1 as $loai_sach_cap_1){
-                $sql = "SELECT * FROM bs_loai_sach WHERE id_loai_cha = ". $loai_sach_cap_1->id;
-                $this->setQuery($sql);
-                $ds_loai_sach_cap_2 = $this->loadAllRow();
-
-                $loai_sach_cap_1->ds_loai_con = $ds_loai_sach_cap_2;
-            }
-            return $ds_loai_sach_cap_1; 
-        }
         function load_toan_bo_danh_sach_sach(){
             $sql = "SELECT * FROM bs_sach";
             $this->setQuery($sql);
@@ -28,27 +14,47 @@
             $info_sach_sua = $this->loadRow();
             return $info_sach_sua;
         }
-        function them_sach_moi($ten_sach, $gioi_thieu, $id_loai_sach, $trang_thai, $hinh, $don_gia){
-            $sql = "INSERT INTO bs_sach(ten_sach, gioi_thieu, id_loai_sach, trang_thai, hinh, don_gia)
+        
+        function them_sach_moi($ten_sach, $id_tac_gia, $gioi_thieu, $doc_thu, $id_loai_sach, $id_nha_xuat_ban, $so_trang, $ngay_xuat_ban, $kich_thuoc, $sku, $trong_luong, $trang_thai, $hinh, $don_gia, $gia_bia, $noi_bat){
+            $sql = "INSERT INTO bs_sach(ten_sach, id_tac_gia, gioi_thieu, doc_thu, id_loai_sach, id_nha_xuat_ban, so_trang, ngay_xuat_ban, kich_thuoc, sku, trong_luong, trang_thai, hinh, don_gia, gia_bia, noi_bat)
             VALUE(?, ?, ?, ?, ?, ?)";
             $this->setQuery($sql);
-            $result = $this->execute(array($ten_sach, $gioi_thieu, $id_loai_sach, $trang_thai, $hinh, $don_gia));
+            $result = $this->execute(array($ten_sach, $id_tac_gia, $gioi_thieu, $doc_thu, $id_loai_sach, $id_nha_xuat_ban, $so_trang, $ngay_xuat_ban, $kich_thuoc, $sku, $trong_luong, $trang_thai, $hinh, $don_gia, $gia_bia, $noi_bat));
             return $result;
         }
 
-        function sua_sach($ten_sach, $gioi_thieu, $id_loai_sach, $trang_thai, $hinh, $don_gia){
+        function cap_nhat_trang_thai_noi_bat_sach($id_sach, $column){
             $sql = "UPDATE bs_sach
-                SET ten_sach =?,
-                    gioi_thieu = ?,
-                    id_loai_sach = ?,
-                    trang_thai = ?,
-                    hinh = ?,
-                    don_gia = ? 
+                    SET $column = 1 - $column
+                    WHERE id = ?";
+            $this->setQuery($sql);
+            $result = $this->execute(array($id_sach));
+            return $result;
+        }
+
+        function sua_sach($ten_sach, $id_tac_gia, $gioi_thieu, $doc_thu, $id_loai_sach, $id_nha_xuat_ban, $so_trang, $ngay_xuat_ban, $kich_thuoc, $sku, $trong_luong, $trang_thai, $hinh, $don_gia, $gia_bia, $noi_bat, $id_sua){
+            $sql = "UPDATE bs_sach
+                SET ten_sach = ?, 
+                id_tac_gia = ?, 
+                gioi_thieu = ?,
+                 doc_thu = ?,
+                 id_loai_sach = ?,
+                 id_nha_xuat_ban = ?,
+                 so_trang = ?,
+                 ngay_xuat_ban = ?,
+                 kich_thuoc = ?,
+                 sku = ?,
+                 trong_luong = ?,
+                 trang_thai = ?,
+                 hinh = ?,
+                 don_gia = ?,
+                 gia_bia = ?,
+                 noi_bat = ?
                 WHERE id = ?";
             // $result = $dbh->prepare($sql);
             // $result->execute([$ten_loai_sach]);
             $this->setQuery($sql);
-            $result = $this->execute(array($ten_sach, $gioi_thieu, $id_loai_sach, $trang_thai, $hinh, $don_gia));
+            $result = $this->execute(array($ten_sach, $id_tac_gia, $gioi_thieu, $doc_thu, $id_loai_sach, $id_nha_xuat_ban, $so_trang, $ngay_xuat_ban, $kich_thuoc, $sku, $trong_luong, $trang_thai, $hinh, $don_gia, $gia_bia, $noi_bat, $id_sua));
 
             return $result;
         }

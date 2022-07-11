@@ -48,7 +48,7 @@
                                     </button>
                                 </a>
 
-                                <a href="?page=tac_gia&id-xoa=<?php echo $tac_gia->id; ?>" onclick="return check_before_delete();">
+                                <a href="?page=tac_gia&id_xoa=<?php echo $tac_gia->id; ?>" onclick="return check_before_delete();">
                                     <button type="button" class="btn btn-danger">
                                         Xoá
                                     </button>

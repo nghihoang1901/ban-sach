@@ -6,7 +6,12 @@
         notice_after_process($result, 'Đã xoá thành công sách có id là ' . $_GET['id_xoa'], 'Có lỗi xảy ra trong lúc xoá sách id là ' . $_GET['id_xoa'], 'sach');
     }
 ?>
-
+<style>
+    #ds_sach img{
+        max-width: 50px;
+        cursor: pointer;
+    }
+</style>
 <div class="row">
 
     <!-- Page Header -->
@@ -20,16 +25,14 @@
     <div class="main_content">
 
         <div class="table-responsive ">
-            <table class="table table-hover table-striped">
+            <table id="ds_sach" class="table table-hover table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Tên sách</th>
                         <th>Giới thiệu</th>
-                        <th>id loại sách</th>
                         <th>Trạng thái</th>
-                        <th>Hình</th>
-                        <th>Đơn giá</th>
+                        <th>nổi bật</th>
 
                     </tr>
                 </thead>
@@ -41,10 +44,23 @@
                         <td><?php echo $sach->id ?></td>
                         <td><?php echo $sach->ten_sach ?></td>
                         <td><?php echo $sach->gioi_thieu ?></td>
-                        <td><?php echo $sach->id_loai_sach ?></td>
-                        <td><?php echo $sach->trang_thai ?></td>
-                        <td><?php echo $sach->hinh ?></td>
-                        <td><?php echo $sach->don_gia ?></td>
+                        <td>
+                        <form action="" method="post">
+                                <input type="hidden" name="trang_thai" value="<?= $sach->id ?>">
+                                <button type="submit">
+                                    <img src="pages/ql_sach/images/icon/<?php echo ($sach->trang_thai)?'tick.png':'delete.png' ?>" alt="">
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="" method="post">
+                                <input type="hidden" name="noi_bat" value="<?= $sach->id ?>">
+
+                                <button type="submit">
+                                    <img src="pages/ql_sach/images/icon/<?php echo ($sach->noi_bat)?'tick.png':'inoge.png' ?>" alt="">
+                                </button>
+                            </form>
+                        </td>
                         <td>
 
                             <a href="?page=sach&chuc_nang=sua&id_sua= <?php echo $sach->id ?>">

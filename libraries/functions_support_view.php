@@ -32,17 +32,13 @@ function add_confirm_box_before_delete(){
     </script>
     <?php
 }
-function sua($id_sua, $page_redirect){
-    $id_sua = "";
-    if(isset($_GET['id_sua'])){
-        $id_sua = $_GET['id_sua'];
-    }
-    else{
+function redirect_by_javascript($page = ''){
+    
         ?>
         <script>
-            window.location.href = '?page=<?= $page_redirect ?>';
+            window.location.href = '?page= <?= $page ?>';
         </script>
         <?php
-    }
+  
 }
 ?>

@@ -19,17 +19,17 @@
             return $info_tac_gia;
         }
 
-        function sua($ten_tac_gia, $gioi_thieu){
+        function sua_tac_gia($ten_tac_gia, $gioi_thieu, $id_sua){
             $sql = "UPDATE bs_tac_gia
-                SET ten_tac_gia =?,
+                SET ten_tac_gia = ?,
                     gioi_thieu = ?,
                 WHERE id = ?";
             $this->setQuery($sql);
-            $result = $this->execute(array($ten_tac_gia, $gioi_thieu));
+            $result = $this->execute(array($ten_tac_gia, $gioi_thieu, $id_sua));
             return $result;
         }
 
-        function them($ten_tac_gia, $gioi_thieu){
+        function them_tac_gia($ten_tac_gia, $gioi_thieu){
             $sql = "INSERT INTO bs_tac_gia(ten_tac_gia, gioi_thieu)
                 VALUE(?, ?)";
             // $result = $dbh->exec($sql);
@@ -39,7 +39,7 @@
         }
 
         function xoa($id_xoa){
-            $sql = 'DELETE FROM bs_tac_gia WHERE id = '. $_GET['id-xoa'];
+            $sql = 'DELETE FROM bs_tac_gia WHERE id = '. $_GET['id_xoa'];
             // $result = $dbh->exec($sql);
             $this->setQuery($sql);
             $result = $this->execute();

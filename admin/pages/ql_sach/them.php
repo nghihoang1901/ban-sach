@@ -29,51 +29,59 @@
                             </div>
 
                             <div class="form-group">
+                                <label>tác giả</label>
+                                <select name="id_tac_gia" id="">
+                                    <?php
+                                        foreach ($ds_tac_gia as $tac_gia) {
+                                            $selected = "";
+                                            if($tac_gia->id == $info_sach_sua->id_loai_sach){
+                                                $selected = 'selected= "true"';
+                                            }
+                                            ?>
+                                            <option <?= $selected ?> value="<?= $tac_gia->id ?>"><?= $tac_gia->ten_tac_gia ?></option>
+                                            <?php
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
                                 <label>giới thiệu</label>
                                 <textarea class="form-control" rows="3" name="gioi_thieu"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <label>Loại sách</label>
-                                <select name="id_loai_sach" id="" class="form-control">
-                                    <option value="0">Không có loại sách</option>
+                                <label>Loại sách</label>
+                                <select name="id_loai_sach" id="">
                                     <?php
-                                    foreach($ds_loai_sach_cap_1 as $loai_con_cap_1){
-                                        ?>
-                                        <option value="<?php echo $loai_con_cap_1->id; ?>">
-                                            <?php echo $loai_con_cap_1->ten_loai_sach; ?>
-                                        </option>
-                                        <?php
-
-                                        if(count($loai_con_cap_1->ds_loai_con) > 0){
-                                            foreach($loai_con_cap_1->ds_loai_con as $loai_con_cap_2){
-                                                ?>
-                                                <option value="<?php echo $loai_con_cap_2->id; ?>">
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $loai_con_cap_2->ten_loai_sach; ?>
-                                                </option>
-                                                <?php 
+                                        foreach ($ds_loai_sach as $loai_sach) {
+                                            $selected = "";
+                                            if($loai_sach->id == $info_sach_sua->id_loai_sach){
+                                                $selected = 'selected= "true"';
                                             }
+                                            ?>
+                                            <option <?= $selected ?> value="<?= $loai_sach->id ?>"><?= $loai_sach->ten_loai_sach ?></option>
+                                            <?php
                                         }
-                                    }
                                     ?>
-
                                 </select>
-                                <p class="help-block">Example block-level help text here.</p>
                             </div>
                             
                             <div class="form-group">
-                                <label>Trạng thái</label>
-                                <br />
-                                <label class="switch">
-                                    <input name="trang_thai" type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>hình</label>
-                                <input type="file" name="hinh">
+                                <label>Nhà xuất bản</label>
+                                <select name="id_nxb" id="">
+                                    <?php
+                                        foreach ($ds_nxb as $nxb) {
+                                            $selected = "";
+                                            if($nxb->id == $info_sach_sua->id_loai_sach){
+                                                $selected = 'selected= "true"';
+                                            }
+                                            ?>
+                                            <option <?= $selected ?> value="<?= $nxb->id ?>"><?= $nxb->ten_nha_xuat_ban ?></option>
+                                            <?php
+                                        }
+                                    ?>
+                                </select>
                             </div>
 
                             <div class="form-group">

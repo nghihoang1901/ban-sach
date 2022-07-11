@@ -8,8 +8,8 @@
 
         function index(){
             // xử lý xóa loại sách
-            if(isset($_GET['id-xoa'])){
-                $result = $this->xl_loai_sach->xoa_loai_sach($_GET['id-xoa']);
+            if(isset($_GET['id_xoa'])){
+                $result = $this->xl_loai_sach->xoa_loai_sach($_GET['id_xoa']);
                 
             }
             // load danh sách loại sách
@@ -39,7 +39,14 @@
         }
 
         function sua(){
-            $id_sua=$_GET['id_sua'];
+            $id_sua='';
+            if(isset($_GET['id_sua'])){
+                $id_sua = $_GET['id_sua'];
+            }
+            else{
+                redirect_by_javascript();
+            }
+
             if(isset($_POST['ten_loai_sach'])){
                 $ten_loai_sach = $_POST['ten_loai_sach'];
                 $id_loai_cha = $_POST['id_loai_cha'];
